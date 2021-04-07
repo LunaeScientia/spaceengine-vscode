@@ -1,0 +1,158 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "SpaceEngine Script",
+    "scopeName": "source.se",
+    "patterns": [
+        {"include": "#comment"},
+        {"include": "#string"},
+        {"include": "#number"},
+        {"include": "#boolean"},
+        {"include": "#paren_expr"},
+        {"include": "#expr"},
+        {"include": "#common-expr"}
+    ],
+    "repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.se",
+                    "match": "//.*"
+                },
+                {
+                    "name": "comment.block.se",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "string": {
+            "name": "string.quoted.double.se",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [{
+                "name": "constant.character.escape.se",
+                "match": "\\\\."
+            }]
+        },
+        "number": {
+            "patterns": [
+                {"include": "#hexadecimal"},
+                {"include": "#decimal"}
+            ],
+            "repository": {
+                "hexadecimal": {
+                    "name": "constant.numeric.se",
+                    "match": "[+-]\\h+"
+                },
+                "decimal": {
+                    "name": "constant.numeric.se",
+                    "match": "[+-]?(?:\\d+\\.?\\d*|\\.\\d+)(?:(?:[eE][+-]?\\d+)|(?:\\*10\\^[+-]?\\d+))?"
+                }
+            }
+        },
+        "boolean": {
+            "patterns": [
+                {
+                    "name": "constant.language.boolean.true.se",
+                    "match": "\\b(true)\\b"
+                },
+                {
+                    "name": "constant.language.boolean.false.se",
+                    "match": "\\b(false)\\b"
+                }
+            ]
+        },
+        "paren_expr": {
+            "patterns": [
+                {
+                    "name": "meta.block.se",
+                    "begin": "\\{|\\(",
+                    "end": "\\}|\\)",
+                    "beginCaptures": {
+                        "0": {"name": "punctuation.paren.open.se"}
+                    },
+                    "endCaptures": {
+                        "0": {"name": "punctuation.paren.close.se"}
+                    },
+                    "patterns": [
+                        {"include": "#comment"},
+                        {
+                            "name": "punctuation.separator.se",
+                            "match": ","
+                        },
+                        {"include": "#string"},
+                        {"include": "#number"},
+                        {"include": "#boolean"},
+                        {"include": "#paren_expr"},
+                        {"include": "#expr"},
+                        {"include": "#common-expr"}
+                    ]
+                }
+            ]
+        },
+        "expr": {
+            "patterns": [
+                {"include": "#control"},
+                {"include": "#keyword"},
+                {"include": "#function"}
+            ],
+            "repository": {
+                "control": {
+                    "match": "(\\S+)\\s*(\\{)\\s*(\\S+)\\s*(==|!=|<|>|<=|>=)\\s*(\\S+)\\s*(\\})",
+                    "captures": {
+                        "1": {"patterns": [{"include": "#keyword"}]},
+                        "2": {"name": "punctuation.paren.open.se"},
+                        "3": {"name": "variable.parameter.se"},
+                        "4": {"name": "keyword.operator.se"},
+                        "5": {"patterns": [
+                            {"include": "#string"},
+                            {"include": "#number"},
+                            {"include": "#boolean"}
+                        ]},
+                        "6": {"name": "punctuation.paren.close.se"}
+                    }
+                },
+                "keyword": {
+                    "patterns": [
+                        {
+                            "name": "keyword.control.conditional.se",
+                            "match": "\\b(if|elif|else|endif)\\b"
+                        },
+                        {
+                            "name": "keyword.control.loop.se",
+                            "match": "\\b(Loop|EndLoop)\\b"
+                        },
+                        {
+                            "name": "keyword.control.flow.se",
+                            "match": "\\b(Break)\\b"
+                        }
+                    ]
+                },
+                "function": {
+                    "patterns": [
+                        {
+                            "name": "entity.name.function.se",
+                            "match": "\\b(AccretionDisk|Asteroid|Atmosphere|Aurora|Barycenter|BeginMultiTrigger|BeginMultitrigger|Break|Button|Center|CheckVersion|ClearSplinePaths|ClearWaypoints|CloseMenu|Clouds|Cluster|Comet|CometTail|Composition|Corona|dbSort|DebugGen|DeleteSplinePath|DeleteWaypoint|DwarfMoon|DwarfPlanet|Edit|EndMultitrigger|EnterPlanetarium|EnterSinglePlayer|Exit|FadeIn|FadeOut|Fly|Follow|FOV|Free|Galaxy|Get|Goto|GotoLocation|GotoURL|Hide|HideAllDialogs|HideAllToolbars|HideDialog|HideMessage|HidePrint|HighlightWidget|Horizon|Interior|Interpolate|Label|Lava|Life|Map|Menu|Moon|MoveMode|Nebula|Ocean|OpenMenu|OptimizeSM|Orbit|PauseMusic|PeriodicTermsDiurnal|PeriodicTermsSecular|Planet|PlayMusic|PlaySplinePath|Print|PrintFont|PrintNames|PrintTexCacheLog|PrintVars|Quasar|Quit|Rebuild|ReloadConstellations|Reset|RestoreVars|ResumeMusic|Rings|RotationModel|Run|SaveDDS|SaveJPG|SavePNG|SaveTGA|SaveTIF|SaveVars|Scene|Screenshot|Select|SessionContinue|Set|SetForce|SetU|SetWidgetStyle|Show|ShowDialog|ShowMessage|Spacecraft|Speed|SpeedKm|SplinePath|Star|StarBarycenter|StarBrowserReset|StartTime|StopFly|StopOrbit|StopTime|StopTurn|Surface|TimeScale|Track|Turn|Unselect|Untrack|UserMoveControl|UserTimeControl|Wait|WaitMessage|WaitTrigger|WaitVar|Watermark|Waypoint)\\b"
+                        }
+                    ]
+                }
+            }
+        },
+        "common-expr": {
+            "patterns": [
+                {"include": "#variable"},
+                {"include": "#function"}
+            ],
+            "repository": {
+                "variable": {
+                    "name": "storage.type.var.se",
+                    "match": "(\\S+)\\s+(?=[^\\{\\}]+)"
+                },
+                "function": {
+                    "name": "entity.name.function.se",
+                    "match": "[a-zA-Z0-9]+"
+                }
+            }
+        }
+    }
+}

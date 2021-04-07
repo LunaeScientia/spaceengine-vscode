@@ -1,0 +1,39 @@
+{
+    "name": "spaceengine-script",
+    "displayName": "SpaceEngine Script for VSCode",
+    "description": "A simple syntax highlighting extension for SpaceEngine script",
+    "version": "0.0.1",
+    "publisher": "lunaescientia",
+    "license": "MIT",
+    "icon": "./images/logo.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LunaeScientia/spaceengine-vscode.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LunaeScientia/spaceengine-vscode/issues"
+    },
+    "engines": {
+        "vscode": "^1.46.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "spaceengine",
+                "aliases": ["SpaceEngine Script", "se"],
+                "extensions": [".se", ".sc", ".ssp", ".cfg"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "spaceengine",
+                "scopeName": "source.se",
+                "path": "./syntaxes/spaceengine.tmLanguage.json"
+            }
+        ]
+    }
+}
