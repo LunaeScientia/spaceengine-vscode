@@ -2,7 +2,7 @@
     "name": "spaceengine-script",
     "displayName": "SpaceEngine Script for VSCode",
     "description": "A simple syntax highlighting extension for SpaceEngine script",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "lunaescientia",
     "license": "MIT",
     "icon": "images/logo.png",

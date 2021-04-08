@@ -7,9 +7,10 @@
         {"include": "#string"},
         {"include": "#number"},
         {"include": "#boolean"},
-        {"include": "#paren_expr"},
-        {"include": "#expr"},
-        {"include": "#common-expr"}
+        {"include": "#paren-expr"},
+        {"include": "#expr-scenario"},
+        {"include": "#expr-catalog-root"},
+        {"include": "#expr-common"}
     ],
     "repository": {
         "comment": {
@@ -62,7 +63,7 @@
                 }
             ]
         },
-        "paren_expr": {
+        "paren-expr": {
             "patterns": [
                 {
                     "name": "meta.block.se",
@@ -83,14 +84,15 @@
                         {"include": "#string"},
                         {"include": "#number"},
                         {"include": "#boolean"},
-                        {"include": "#paren_expr"},
-                        {"include": "#expr"},
-                        {"include": "#common-expr"}
+                        {"include": "#paren-expr"},
+                        {"include": "#expr-scenario"},
+                        {"include": "#expr-catalog-param"},
+                        {"include": "#expr-common"}
                     ]
                 }
             ]
         },
-        "expr": {
+        "expr-scenario": {
             "patterns": [
                 {"include": "#control"},
                 {"include": "#keyword"},
@@ -132,13 +134,29 @@
                     "patterns": [
                         {
                             "name": "entity.name.function.se",
-                            "match": "\\b(AccretionDisk|Asteroid|Atmosphere|Aurora|Barycenter|BeginMultiTrigger|BeginMultitrigger|Break|Button|Center|CheckVersion|ClearSplinePaths|ClearWaypoints|CloseMenu|Clouds|Cluster|Comet|CometTail|Composition|Corona|dbSort|DebugGen|DeleteSplinePath|DeleteWaypoint|DwarfMoon|DwarfPlanet|Edit|EndMultitrigger|EnterPlanetarium|EnterSinglePlayer|Exit|FadeIn|FadeOut|Fly|Follow|FOV|Free|Galaxy|Get|Goto|GotoLocation|GotoURL|Hide|HideAllDialogs|HideAllToolbars|HideDialog|HideMessage|HidePrint|HighlightWidget|Horizon|Interior|Interpolate|Label|Lava|Life|Map|Menu|Moon|MoveMode|Nebula|Ocean|OpenMenu|OptimizeSM|Orbit|PauseMusic|PeriodicTermsDiurnal|PeriodicTermsSecular|Planet|PlayMusic|PlaySplinePath|Print|PrintFont|PrintNames|PrintTexCacheLog|PrintVars|Quasar|Quit|Rebuild|ReloadConstellations|Reset|RestoreVars|ResumeMusic|Rings|RotationModel|Run|SaveDDS|SaveJPG|SavePNG|SaveTGA|SaveTIF|SaveVars|Scene|Screenshot|Select|SessionContinue|Set|SetForce|SetU|SetWidgetStyle|Show|ShowDialog|ShowMessage|Spacecraft|Speed|SpeedKm|SplinePath|Star|StarBarycenter|StarBrowserReset|StartTime|StopFly|StopOrbit|StopTime|StopTurn|Surface|TimeScale|Track|Turn|Unselect|Untrack|UserMoveControl|UserTimeControl|Wait|WaitMessage|WaitTrigger|WaitVar|Watermark|Waypoint)\\b"
+                            "match": "\\b(BeginMultiTrigger|BeginMultitrigger|Break|Button|Center|CheckVersion|ClearSplinePaths|ClearWaypoints|CloseMenu|dbSort|DebugGen|DeleteSplinePath|DeleteWaypoint|Edit|EndMultitrigger|EnterPlanetarium|EnterSinglePlayer|Exit|FadeIn|FadeOut|Fly|Follow|FOV|Free|Get|Goto|GotoLocation|GotoURL|Hide|HideAllDialogs|HideAllToolbars|HideDialog|HideMessage|HidePrint|HighlightWidget|Horizon|Interpolate|Label|Map|Menu|MoveMode|OpenMenu|OptimizeSM|PauseMusic|PlayMusic|PlaySplinePath|Print|PrintFont|PrintNames|PrintTexCacheLog|PrintVars|Quit|Rebuild|ReloadConstellations|Reset|RestoreVars|ResumeMusic|Run|SaveDDS|SaveJPG|SavePNG|SaveTGA|SaveTIF|SaveVars|Scene|Screenshot|Select|SessionContinue|Set|SetForce|SetU|SetWidgetStyle|Show|ShowDialog|ShowMessage|Speed|SpeedKm|SplinePath|StarBrowserReset|StartTime|StopFly|StopOrbit|StopTime|StopTurn|TimeScale|Track|Turn|Unselect|Untrack|UserMoveControl|UserTimeControl|Wait|WaitMessage|WaitTrigger|WaitVar|Watermark|Waypoint)\\b"
                         }
                     ]
                 }
             }
         },
-        "common-expr": {
+        "expr-catalog-root": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.se",
+                    "match": "\\b(Asteroid|Barycenter|Cluster|Comet|DwarfMoon|DwarfPlanet|Galaxy|Moon|Nebula|Planet|Quasar|Spacecraft|Star|StarBarycenter)\\b"
+                }
+            ]
+        },
+        "expr-catalog-param": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.se",
+                    "match": "\\b(AccretionDisk|Atmosphere|Aurora|Clouds|CometTail|Composition|Corona|Interior|Lava|Life|Ocean|Orbit|PeriodicTermsDiurnal|PeriodicTermsSecular|Rings|RotationModel|Surface)\\b"
+                }
+            ]
+        },
+        "expr-common": {
             "patterns": [
                 {"include": "#variable"},
                 {"include": "#function"}
