@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "publisher": "lunaescientia",
     "license": "MIT",
-    "icon": "./images/logo.png",
+    "icon": "images/logo.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/LunaeScientia/spaceengine-vscode.git"
